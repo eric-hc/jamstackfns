@@ -5,25 +5,138 @@ image: '/images/og.png'
 ---
 
 ```js
-import fetch from 'isomorphic-unfetch';
+const sendGrid = require('@sendgrid/client');
+const {
+  SENDGRID_API_KEY,
+  SENDGRID_SENDER_EMAIL,
+  SENDGRID_SENDER_NAME
+} = process.env;
 
-export default async (_, res) => {
-  const API_KEY = process.env.GUMROAD_API_KEY;
-  const response = await fetch(`https://api.gumroad.com/v2/products/sDpG`, {
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    method: 'GET'
-  });
+sendGrid.setApiKey(SENDGRID_API_KEY);
 
-  const { product } = await response.json();
-  const sales = product.sales_usd_cents / 100;
+export default async (req, res) => {
+  const { email } = req.body;
 
-  return res.status(200).json({ sales });
+  let response;
+  try {
+    await await sendGrid.request({
+      method: 'POST',
+      url: '/v3/contactdb/recipients',
+      body: [
+        {
+          email: email
+        }
+      ]
+    });
+
+    response = await sendGrid.request({
+      method: 'POST',
+      url: '/v3/mail/send',
+      body: {
+        from: {
+          email: SENDGRID_SENDER_EMAIL,
+          name: SENDGRID_SENDER_NAME
+        },
+        reply_to: {
+          email: SENDGRID_SENDER_EMAIL
+        },
+        personalizations: [
+          {
+            to: [
+              {
+                email: email
+              }
+            ],
+            subject: 'Hello, World!'
+          }
+        ],
+        content: [
+          {
+            type: 'text/plain',
+            value: 'Hello, World!'
+          }
+        ]
+      }
+    });
+  } catch (error) {
+    return res.status(error.statusCode || 500).json({ error: error.message });
+  }
+
+  return res
+    .status(response.statusCode)
+    .json({ message: `${email} sent successfully!` });
 };
 ```
 
-I was recently in the job hunt before starting my [new position at Hy-Vee](/blog/joining-hy-vee).
-During that experience, I learned a lot about what benefits I like and dislike.
-Through some self-reflection, I've put together a list of benefits I care about.
+```js
+const sendGrid = require('@sendgrid/client');
+const {
+  SENDGRID_API_KEY,
+  SENDGRID_SENDER_EMAIL,
+  SENDGRID_SENDER_NAME
+} = process.env;
+
+sendGrid.setApiKey(SENDGRID_API_KEY);
+
+exports.handler = async (event, context) => {
+  const body = JSON.parse(event.body);
+  const email = body.email;
+
+  let response;
+  try {
+    await await sendGrid.request({
+      method: 'POST',
+      url: '/v3/contactdb/recipients',
+      body: [
+        {
+          email: email
+        }
+      ]
+    });
+
+    response = await sendGrid.request({
+      method: 'POST',
+      url: '/v3/mail/send',
+      body: {
+        from: {
+          email: SENDGRID_SENDER_EMAIL,
+          name: SENDGRID_SENDER_NAME
+        },
+        reply_to: {
+          email: SENDGRID_SENDER_EMAIL
+        },
+        personalizations: [
+          {
+            to: [
+              {
+                email: email
+              }
+            ],
+            subject: 'Hello, World!'
+          }
+        ],
+        content: [
+          {
+            type: 'text/plain',
+            value: 'Hello, World!'
+          }
+        ]
+      }
+    });
+  } catch (error) {
+    return {
+      statusCode: error.statusCode || 500,
+      body: JSON.stringify({
+        error: error.message
+      })
+    };
+  }
+
+  return {
+    statusCode: response.statusCode,
+    body: JSON.stringify({
+      message: `${email} sent successfully!`
+    })
+  };
+};
+```

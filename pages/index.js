@@ -82,11 +82,11 @@ const Index = () => (
         <FunctionCard
           title="Gumroad"
           slug="gumroad"
-          description="Retrieve information about a user."
+          description="Retrieve all sales for a user."
         />
         <FunctionCard
           title="Gumroad"
-          slug="gumroad"
+          slug="gumroad-product"
           description="Retrieve all sales for a product."
         />
       </SimpleGrid>
