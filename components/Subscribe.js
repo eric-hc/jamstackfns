@@ -89,6 +89,7 @@ const Subscribe = () => {
             onClick={subscribe}
             bg="blue.900"
             color="white"
+            _hover={{ bg: 'blue.700' }}
           >
             Subscribe
           </Button>

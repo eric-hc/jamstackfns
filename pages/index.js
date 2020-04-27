@@ -14,7 +14,7 @@ const Index = () => (
       backgroundSize="cover"
       backgroundImage="url(/logos.png)"
       position="relative"
-      h="500px"
+      h={['100px', '300px', '500px']}
       maxWidth="1620px"
       mt="-50px"
     >
@@ -22,18 +22,19 @@ const Index = () => (
         spacing={8}
         justifyContent="center"
         alignItems="flex-start"
-        m="3rem auto 4rem auto"
+        m={['0', '2rem auto', '3rem auto 4rem auto']}
         maxWidth="900px"
       >
         <Flex
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
-          m="3rem auto"
-          p={8}
+          m={['1rem auto', '0 auto', '3rem auto']}
+          p={['1rem 0', '3rem 0', '2rem']}
           bg="white"
           maxWidth="550px"
           minWidth="340px"
+          minh={['250px', '360px', '340px']}
         >
           <Box as="img" src="/logo.svg" height="100px" width="100px" />
           <Heading
@@ -57,16 +58,19 @@ const Index = () => (
         <FunctionCard
           title="Mailchimp"
           slug="mailchimp"
+          logo="mailchimp.png"
           description="Subscribe to a newsletter."
         />
         <FunctionCard
           title="Mailgun"
           slug="mailgun"
+          logo="mailgun.png"
           description="Send an email to a user."
         />
         <FunctionCard
           title="SendGrid"
           slug="sendgrid"
+          logo="sendgrid.png"
           description="Send an email to a user."
         />
       </SimpleGrid>
@@ -77,16 +81,19 @@ const Index = () => (
         <FunctionCard
           title="Stripe"
           slug="stripe"
+          logo="stripe.png"
           description="Accept a payment using Checkout."
         />
         <FunctionCard
           title="Gumroad"
           slug="gumroad"
+          logo="gumroad.png"
           description="Retrieve all sales for a user."
         />
         <FunctionCard
           title="Gumroad"
           slug="gumroad-product"
+          logo="gumroad.png"
           description="Retrieve all sales for a product."
         />
       </SimpleGrid>
@@ -97,16 +104,19 @@ const Index = () => (
         <FunctionCard
           title="YouTube"
           slug="youtube"
+          logo="youtube.png"
           description="Get channel statistics."
         />
         <FunctionCard
           title="Analytics"
           slug="google-analytics"
+          logo="google-analytics.png"
           description="Page views over a given range."
         />
         <FunctionCard
           title="Sheets"
           slug="google-sheets"
+          logo="google-sheets.png"
           description="Create an entry in a sheet."
         />
       </SimpleGrid>

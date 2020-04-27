@@ -2,7 +2,7 @@ import React from 'react';
 import NextLink from 'next/link';
 import { Avatar, Box, Link, Heading, Text } from '@chakra-ui/core';
 
-const FunctionCard = ({ title, description, slug, ...rest }) => (
+const FunctionCard = ({ title, description, slug, logo, ...rest }) => (
   <NextLink href={`f/${slug}`} passHref>
     <Link
       boxShadow="0 0 0 1px #E2E8F0"
@@ -15,7 +15,7 @@ const FunctionCard = ({ title, description, slug, ...rest }) => (
       {...rest}
     >
       <Box boxShadow="0 0 0 1px #E2E8F0" borderRadius="50%" width="32px">
-        <Avatar size="sm" name={title} src={`/logos/avatars/${slug}.png`} />
+        <Avatar size="sm" name={title} src={`/logos/avatars/${logo}`} />
       </Box>
       <Heading as="h3" size="sm" fontWeight="bold" textAlign="left" mt={4}>
         {title}
