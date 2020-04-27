@@ -5,6 +5,7 @@ const excludedWords = [
   'APIs',
   'CSS',
   'GraphQL',
+  'JAMstack',
   'MDX',
   'IDE',
   'SWR',

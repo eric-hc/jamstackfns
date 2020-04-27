@@ -10,7 +10,7 @@ const FunctionCard = ({ title, description, slug, logo, ...rest }) => (
       h="130px"
       p={4}
       transition="all 0.3s cubic-bezier(.08,.52,.52,1)"
-      w="250px"
+      w="100%"
       _hover={{ boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)' }}
       {...rest}
     >

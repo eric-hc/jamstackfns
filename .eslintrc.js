@@ -13,11 +13,10 @@ module.exports = {
       'error',
       {
         allow: [
-          'client_email',
-          'client_id',
-          'private_key',
-          'project_id',
-          'email_address'
+          'consumer_key',
+          'consumer_secret',
+          'access_token',
+          'access_token_secret'
         ]
       }
     ]

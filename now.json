@@ -3,6 +3,9 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "env": {
-    "BUTTONDOWN_API_KEY": "@buttondown-api-key"
+    "BUTTONDOWN_API_KEY": "@buttondown-api-key",
+    "TWITTER_CONSUMER_KEY": "@twitter-consumer-key",
+    "TWITTER_CONSUMER_SECRET": "@twitter-consumer-secret",
+    "SESSION_SECRET": "@session-secret"
   }
 }

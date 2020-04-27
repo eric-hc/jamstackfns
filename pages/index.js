@@ -12,11 +12,11 @@ const Index = () => (
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      backgroundImage="url(/logos.png)"
+      backgroundImage={['none', 'url(/logos.png)']}
       position="relative"
       h={['100px', '300px', '500px']}
       maxWidth="1620px"
-      mt="-50px"
+      mt={[0, '-50px']}
     >
       <Stack
         spacing={8}
@@ -28,7 +28,7 @@ const Index = () => (
         <Flex
           flexDirection="column"
           justifyContent="center"
-          alignItems="center"
+          alignItems={['flex-start', 'center', 'center']}
           m={['1rem auto', '0 auto', '3rem auto']}
           p={['1rem 0', '3rem 0', '2rem']}
           bg="white"
@@ -36,7 +36,13 @@ const Index = () => (
           minWidth="340px"
           minh={['250px', '360px', '340px']}
         >
-          <Box as="img" src="/logo.svg" height="100px" width="100px" />
+          <Box
+            as="img"
+            src="/logo.svg"
+            height="100px"
+            width="100px"
+            display={['none', 'block', 'block']}
+          />
           <Heading
             letterSpacing="tight"
             as="h1"

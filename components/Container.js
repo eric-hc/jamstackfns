@@ -24,8 +24,8 @@ const Container = ({ children }) => (
       bg="rgba(255, 255, 255, 0.8)"
       as="nav"
       p={8}
-      mt={[0, 8]}
-      mb={8}
+      mt={[0, 0, 8]}
+      mb={[0, 0, 8]}
       mx="auto"
     >
       <NextLink href="/" passHref>
