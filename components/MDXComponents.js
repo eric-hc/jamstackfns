@@ -8,8 +8,7 @@ import {
   Link,
   PseudoBox,
   Text,
-  Divider,
-  useColorMode
+  Divider
 } from '@chakra-ui/core';
 import { jsx } from '@emotion/core';
 import NextLink from 'next/link';
@@ -19,16 +18,10 @@ const Table = (props) => (
 );
 
 const THead = (props) => {
-  const { colorMode } = useColorMode();
-  const bg = {
-    light: 'gray.50',
-    dark: 'whiteAlpha.100'
-  };
-
   return (
     <Box
       as="th"
-      bg={bg[colorMode]}
+      bg="gray.50"
       fontWeight="semibold"
       p={2}
       fontSize="sm"
@@ -50,38 +43,26 @@ const TData = (props) => (
 );
 
 const CustomLink = (props) => {
-  const { colorMode } = useColorMode();
-  const color = {
-    light: 'hsl(208, 99%, 44%)',
-    dark: 'hsl(208, 95%, 68%)'
-  };
-
   const href = props.href;
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
 
   if (isInternalLink) {
     return (
       <NextLink href={href} passHref>
-        <Link color={color[colorMode]} {...props} />
+        <Link color="hsl(208, 99%, 44%)" {...props} />
       </NextLink>
     );
   }
 
-  return <Link color={color[colorMode]} isExternal {...props} />;
+  return <Link color="hsl(208, 99%, 44%)" isExternal {...props} />;
 };
 
 const Quote = (props) => {
-  const { colorMode } = useColorMode();
-  const bgColor = {
-    light: 'blue.50',
-    dark: 'blue.900'
-  };
-
   return (
     <Callout
       mt={4}
       w="98%"
-      bg={bgColor[colorMode]}
+      bg="blue.50"
       variant="left-accent"
       status="info"
       css={{
@@ -139,13 +120,7 @@ const DocsHeading = (props) => (
 );
 
 const Hr = () => {
-  const { colorMode } = useColorMode();
-  const borderColor = {
-    light: 'gray.200',
-    dark: 'gray.600'
-  };
-
-  return <Divider borderColor={borderColor[colorMode]} my={4} w="100%" />;
+  return <Divider borderColor="gray.200" my={4} w="100%" />;
 };
 
 const MDXComponents = {

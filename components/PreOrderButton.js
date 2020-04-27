@@ -1,26 +1,28 @@
 import React from 'react';
 import { Text, Flex, Stack, Image, Button, Icon } from '@chakra-ui/core';
-import { loadStripe } from '@stripe/stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+// const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const PurchaseButton = () => {
-  const checkout = async (e) => {
-    e.preventDefault();
-
-    const res = await fetch(`/api/purchase`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'GET'
-    });
-
-    const result = await res.json();
-    const stripe = await stripePromise;
-    const { error } = await stripe.redirectToCheckout({
-      sessionId: result.id
-    });
-  };
+  /*
+   * const checkout = async (e) => {
+   *   e.preventDefault();
+   *
+   *   const res = await fetch(`/api/purchase`, {
+   *     headers: {
+   *       'Content-Type': 'application/json'
+   *     },
+   *     method: 'GET'
+   *   });
+   *
+   *   const result = await res.json();
+   *   const stripe = await stripePromise;
+   *   const { error } = await stripe.redirectToCheckout({
+   *     sessionId: result.id
+   *   });
+   * };
+   */
 
   return (
     <Stack justify="center" my={8} mx="auto">
@@ -31,7 +33,7 @@ const PurchaseButton = () => {
         color="white"
         size="lg"
         fontWeight="bold"
-        onClick={checkout}
+        // onClick={checkout}
       >
         Pre-order now
       </Button>

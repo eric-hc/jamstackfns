@@ -1,25 +1,12 @@
 import React from 'react';
 import NextLink from 'next/link';
-import useSWR from 'swr';
-import format from 'comma-number';
-import { useColorMode, Heading, Text, Flex, Box, Link } from '@chakra-ui/core';
-
-import fetcher from '../lib/fetcher';
+import { Heading, Text, Flex, Box, Link } from '@chakra-ui/core';
 
 const BlogPost = (frontMatter) => {
   const { title, summary } = frontMatter;
-  const { colorMode } = useColorMode();
-  const secondaryTextColor = {
-    light: 'gray.700',
-    dark: 'gray.400'
-  };
-
   const slug = frontMatter.__resourcePath
     .replace('blog/', '')
     .replace('.mdx', '');
-
-  const { data } = useSWR(`/api/page-views?id=${slug}`, fetcher);
-  const views = data?.total;
 
   return (
     <NextLink href={`blog/${slug}`} passHref>
@@ -40,10 +27,10 @@ const BlogPost = (frontMatter) => {
               textAlign={['left', 'right']}
               mb={[4, 0]}
             >
-              {`${views ? format(views) : '–––'} views`}
+              {frontMatter.readingTime.text}
             </Text>
           </Flex>
-          <Text color={secondaryTextColor[colorMode]}>{summary}</Text>
+          <Text color="gray.700">{summary}</Text>
         </Box>
       </Link>
     </NextLink>

@@ -8,26 +8,12 @@ import {
   InputRightElement,
   Button,
   Text,
-  useToast,
-  useColorMode
+  useToast
 } from '@chakra-ui/core';
 
 const Subscribe = () => {
   const inputEl = useRef(null);
   const toast = useToast();
-  const { colorMode } = useColorMode();
-  const bgColor = {
-    light: 'blue.50',
-    dark: 'blue.900'
-  };
-  const buttonTextColor = {
-    light: 'white',
-    dark: 'blue.900'
-  };
-  const buttonBgColor = {
-    light: 'blue.900',
-    dark: 'blue.200'
-  };
 
   const subscribe = async (e) => {
     e.preventDefault();
@@ -68,7 +54,7 @@ const Subscribe = () => {
 
   return (
     <Box
-      bg={bgColor[colorMode]}
+      bg="blue.50"
       borderRadius={8}
       padding={6}
       my={8}
@@ -80,7 +66,7 @@ const Subscribe = () => {
         as="h5"
         size="md"
         mb={1}
-        color={buttonBgColor[colorMode]}
+        color="blue.900"
         letterSpacing="tight"
         fontWeight="black"
       >
@@ -101,8 +87,8 @@ const Subscribe = () => {
             h="1.75rem"
             size="sm"
             onClick={subscribe}
-            bg={buttonBgColor[colorMode]}
-            color={buttonTextColor[colorMode]}
+            bg="blue.900"
+            color="white"
           >
             Subscribe
           </Button>

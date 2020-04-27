@@ -7,8 +7,6 @@ logo: 'google-analytics.png'
 ```js
 import { google } from 'googleapis';
 
-import googleAuth from '../../lib/google/auth';
-
 export default async (req, res) => {
   const startDate = req.query.startDate;
   const auth = new google.auth.GoogleAuth({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, RadioButtonGroup } from '@chakra-ui/core';
 
 const CustomRadio = React.forwardRef((props, ref) => {
@@ -19,17 +19,53 @@ const CustomRadio = React.forwardRef((props, ref) => {
 });
 
 const ToggleSwitch = ({ children, ...rest }) => {
+  const [provider, setProvider] = useState('vercel');
+
   return (
-    <RadioButtonGroup onChange={(val) => console.log(val)} isInline {...rest}>
+    <RadioButtonGroup
+      isInline
+      onChange={(val) => setProvider(val)}
+      defaultValue="vercel"
+      mt={8}
+      css={{
+        '~ pre': {
+          display: provider === 'netlify' ? 'initial' : 'none'
+        },
+        ' + pre:nth-of-type(1)': {
+          display: provider === 'vercel' ? 'initial' : 'none'
+        }
+      }}
+      {...rest}
+    >
       <CustomRadio
-        value="1"
+        value="vercel"
         borderBottomRightRadius={0}
         borderTopRightRadius={0}
       >
-        {children[0]}
+        <Box
+          as="img"
+          alt="Vercel"
+          src="/logos/vercel.svg"
+          width="18px"
+          height="18px"
+          mr={2}
+        />
+        Vercel
       </CustomRadio>
-      <CustomRadio value="2" borderBottomLeftRadius={0} borderTopLeftRadius={0}>
-        {children[1]}
+      <CustomRadio
+        value="netlify"
+        borderBottomLeftRadius={0}
+        borderTopLeftRadius={0}
+      >
+        <Box
+          as="img"
+          alt="Netlify"
+          src="/logos/netlify.png"
+          width="18px"
+          height="18px"
+          mr={2}
+        />
+        Netlify
       </CustomRadio>
     </RadioButtonGroup>
   );

@@ -1,0 +1,66 @@
+---
+title: 'Mailgun'
+description: 'Send an email to a user.'
+logo: 'mailgun.png'
+---
+
+import ToggleSwitch from '../../components/ToggleSwitch';
+
+<ToggleSwitch />
+
+```js
+const mailgunSdk = require('mailgun-js');
+const apiKey = process.env.MAILGUN_API_KEY;
+const domain = `mail.${process.env.DOMAIN}`;
+const mailgun = mailgunSdk({ apiKey, domain });
+
+export default async (req, res) => {
+  let response;
+  try {
+    response = await mailgun.messages().send({
+      to: req.body.to,
+      from: req.body.from,
+      subject: req.body.subject,
+      text: req.body.text
+    });
+  } catch (e) {
+    return res.status(e.statusCode || 500).json({ error: e.message });
+  }
+  return res.status(200).json({ result: response.message });
+};
+```
+
+```js
+const mailgunSdk = require('mailgun-js');
+const apiKey = process.env.MAILGUN_API_KEY;
+const domain = `mail.${process.env.DOMAIN}`;
+const mailgun = mailgunSdk({ apiKey, domain });
+
+exports.handler = async (event, context, callback) => {
+  const data = JSON.parse(event.body);
+
+  let response;
+  try {
+    response = await mailgun.messages().send({
+      to: data.to,
+      from: data.from,
+      subject: data.subject,
+      text: data.text
+    });
+  } catch (e) {
+    return {
+      statusCode: e.statusCode || 500,
+      body: JSON.stringify({
+        error: e.message
+      })
+    };
+  }
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      result: response.message
+    })
+  };
+};
+```
