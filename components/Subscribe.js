@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import fetch from 'isomorphic-unfetch';
 import {
   Heading,
@@ -12,11 +12,13 @@ import {
 } from '@chakra-ui/core';
 
 const Subscribe = () => {
+  const [loading, setLoading] = useState(false);
   const inputEl = useRef(null);
   const toast = useToast();
 
   const subscribe = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const res = await fetch('/api/subscribe', {
       body: JSON.stringify({
@@ -28,6 +30,7 @@ const Subscribe = () => {
       method: 'POST'
     });
 
+    setLoading(false);
     const { error } = await res.json();
 
     if (error) {
@@ -83,6 +86,7 @@ const Subscribe = () => {
         />
         <InputRightElement width="6.75rem">
           <Button
+            isLoading={loading}
             fontWeight="bold"
             h="1.75rem"
             size="sm"
