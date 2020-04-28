@@ -62,14 +62,14 @@ exports.handler = async (event, context, callback) => {
 
 ## Usage
 
-<Step number={1} title="Create Stripe Account" />
+<Step number={1} title="Create Checkout Session" />
 
-First, [create a Stripe account](https://stripe.com/). Then, generate an [API key](https://mailchimp.com/help/about-api-keys/#find+or+generate+your+api+key).
+Using the function above, create a checkout session returning `CHECKOUT_SESSION_ID`.
+Upon success, it will redirect to your `success_url`.
 
-<Step number={2} title="Find Audience ID" />
+<Step number={2} title="Redirect to Checkout" />
 
-Each Mailchimp audience has a unique [Audience ID](https://mailchimp.com/help/find-audience-id/).
-Retrieve the ID for the list you want to add a subscriber to.
+Follow [Stripe's documentation](https://stripe.com/docs/payments/checkout/one-time) to complete the client-side.
 
 <Step number={3} title="Add Environment Variables" />
 

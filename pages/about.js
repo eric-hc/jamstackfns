@@ -1,6 +1,6 @@
 import React from 'react';
 import { NextSeo } from 'next-seo';
-import { Heading, Text, Flex, Stack, Link } from '@chakra-ui/core';
+import { Heading, Text, Flex, Stack, Link, Image, Box } from '@chakra-ui/core';
 
 import Container from '../components/Container';
 
@@ -36,47 +36,72 @@ const About = () => (
             About
           </Heading>
           <Text color="gray.700" mb={4}>
-            Hey, I’m Lee. I live in Des Moines, IA and I’m a Senior Software
-            Engineer at&nbsp;
             <Link
-              href="https://innovate.hy-vee.com"
-              title="Hy-Vee"
+              href="https://jamstack.org/"
+              title="JAMstack"
               isExternal
               color="hsl(208, 99%, 44%)"
             >
-              Hy-Vee
+              {'JAMstack'}
             </Link>
-            , a $10B grocery tech company in the Midwest. As a tech lead, my
-            primary focus is developing Aisles Online, Hy-Vee’s e-commerce
-            grocery shopping platform – which serves millions of customers every
-            year. I also help maintain our internal component library.
-          </Text>
-          <Text color="gray.700" mb={4}>
-            At the beginning of 2020, I launched my most ambitious project – a
-            50+ lesson video course on React and Next.js. It’s called&nbsp;
+            &nbsp;(JavaScript, APIs, and Markup) is fundamentally reshaping the
+            web. Coined by&nbsp;
             <Link
-              href="https://masteringnextjs.com"
-              title="Mastering Next.js"
+              href="https://en.wikipedia.org/wiki/Netlify#JAMstack"
+              title="JAMstack"
               isExternal
               color="hsl(208, 99%, 44%)"
             >
-              Mastering Next.js
+              {`Netlify's co-founder`}
             </Link>
-            , and it’s been my most successful solo-endeavor so far.
+            , JAMstack bridges the gap between static and dynamic websites.
+            Capitalize on static site performance, security, and scalability
+            while still having dynamic data.
           </Text>
           <Text color="gray.700" mb={4}>
-            I’ve spoken across the country at conferences and meet-ups about
-            front-end development, design, and recruiting. I also actively
-            contribute to my blog, which attracts thousands of readers every
-            month. I mostly write about development, tech careers, and my
-            personal life.
+            <Link href="/" title="jamstackfns" color="hsl(208, 99%, 44%)">
+              {'JAMstack Functions'}
+            </Link>
+            &nbsp;is a directory of the best serverless functions for JAMstack
+            applications. Quickly deploy serverless functions to Vercel or
+            Netlify for your static site and start building.
           </Text>
           <Text color="gray.700" mb={4}>
-            I grew up in small-town Iowa and went to school at Iowa State,
-            graduating with a degree in Computer Engineering. I spend my free
-            time playing music, creating videos, and enjoying time with friends
-            and family
+            Created by&nbsp;
+            <Link
+              href="https://leerob.io"
+              title="Lee Robinson"
+              color="hsl(208, 99%, 44%)"
+            >
+              {'Lee Robinson.'}
+            </Link>
           </Text>
+          <Heading letterSpacing="tight" mb={2} as="h2" size="lg">
+            Assets
+          </Heading>
+          <Stack
+            borderRadius={4}
+            border="1px solid"
+            borderColor="gray.200"
+            align="center"
+          >
+            <Image src="/logo.svg" alt="logo" p={16} />
+            <Text fontSize="sm" color="gray.500" pb={4}>
+              Light Logo
+            </Text>
+          </Stack>
+          <Stack
+            borderRadius={4}
+            border="1px solid"
+            borderColor="gray.200"
+            align="center"
+            mt={8}
+          >
+            <Image src="/og.png" alt="banner" p={2} objectFit="scale-down" />
+            <Text fontSize="sm" color="gray.500" pb={4}>
+              Banner Image
+            </Text>
+          </Stack>
         </Flex>
       </Stack>
     </Container>
