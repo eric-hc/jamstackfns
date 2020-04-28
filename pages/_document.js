@@ -1,7 +1,7 @@
 import Document, { Head, Main, NextScript } from 'next/document';
 import React from 'react';
 
-const GA_TRACKING_ID = 'TODO';
+const GA_TRACKING_ID = 'UA-131784128-2';
 
 class MyDocument extends Document {
   render() {
@@ -16,8 +16,15 @@ class MyDocument extends Document {
             content="/favicons/browserconfig.xml"
             name="msapplication-config"
           />
-          <meta content="TODO" name="yandex-verification" />
-          <meta content="TODO" name="google-site-verification" />
+          <meta name="yandex-verification" content="ac24b3c8c045859c" />
+          <meta
+            name="msvalidate.01"
+            content="D3F1E027D2CE5F0BC924EB159C60EA9A"
+          />
+          <meta
+            content="96-GEk0BvQPcuNoT4qfe28GDAmmS4Z7PJbhWPbjYtKc"
+            name="google-site-verification"
+          />
           <link href="/favicons/favicon.ico" rel="shortcut icon" />
           <link href="/favicons/site.webmanifest" rel="manifest" />
           <link
