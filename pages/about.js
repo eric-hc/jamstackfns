@@ -1,6 +1,6 @@
 import React from 'react';
 import { NextSeo } from 'next-seo';
-import { Heading, Text, Flex, Stack, Link, Image, Box } from '@chakra-ui/core';
+import { Heading, Text, Flex, Stack, Link, Image } from '@chakra-ui/core';
 
 import Container from '../components/Container';
 

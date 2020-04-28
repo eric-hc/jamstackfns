@@ -1,16 +1,27 @@
 /** @jsx jsx */
 import { Heading, Text, Flex, Stack, Avatar, Box } from '@chakra-ui/core';
 import { jsx } from '@emotion/core';
+import { NextSeo } from 'next-seo';
 
 import Container from '../components/Container';
-// import BlogSeo from '../components/BlogSeo';
 import Subscribe from '../components/Subscribe';
 
 export default (frontMatter) => {
+  const slug = frontMatter.__resourcePath.replace('f/', '').replace('.mdx', '');
+  const title = `${frontMatter.title} - jamstackfns`;
+  const url = `https://jamstackfns.com/f/${slug}`;
+
   return ({ children: content }) => {
     return (
       <Container>
-        {/* <BlogSeo url={`https://jamstackfns.com/f/${slug}`} {...frontMatter} /> */}
+        <NextSeo
+          title={title}
+          canonical={url}
+          openGraph={{
+            url,
+            title
+          }}
+        />
         <Stack
           as="section"
           spacing={0}

@@ -12,12 +12,11 @@ $ yarn dev
 To use anything that requires API routes, you will need to run `now dev` and have a `.env` file similar to this.
 
 ```
-FIREBASE_PRIVATE_KEY=
-FIREBASE_CLIENT_EMAIL=
-UNSPLASH_ACCESS_KEY=
-GOOGLE_ENCRYPTION_KEY=
-GOOGLE_ENCRYPTION_IV=
 BUTTONDOWN_API_KEY=
+TWITTER_CONSUMER_KEY=
+TWITTER_CONSUMER_SECRET=
+SESSION_SECRET=
+SENDGRID_API_KEY=
 ```
 
 ## Built Using
