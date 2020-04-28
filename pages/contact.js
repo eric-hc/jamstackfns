@@ -87,13 +87,15 @@ const Contact = () => {
           alignItems="flex-start"
           m="0 auto 4rem auto"
           maxWidth="700px"
+          px={8}
+          w="100%"
         >
           <Flex
             flexDirection="column"
             justifyContent="flex-start"
             alignItems="flex-start"
             maxWidth="700px"
-            minW="500px"
+            w="100%"
           >
             <Heading letterSpacing="tight" mb={8} as="h1" size="xl">
               Let's hear from you.
