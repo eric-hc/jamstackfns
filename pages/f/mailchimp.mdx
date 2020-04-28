@@ -4,6 +4,7 @@ description: 'Subscribe to a newsletter.'
 logo: 'mailchimp.png'
 ---
 
+import Step from '../../components/Step';
 import ToggleSwitch from '../../components/ToggleSwitch';
 
 <ToggleSwitch />
@@ -113,3 +114,24 @@ exports.handler = async (event, context, callback) => {
   };
 };
 ```
+
+## Usage
+
+<Step number={1} title="Create Mailchimp Account" />
+
+First, [create a Mailchimp account](https://mailchimp.com/). Then, generate an [API key](https://mailchimp.com/help/about-api-keys/#find+or+generate+your+api+key).
+
+<Step number={2} title="Find Audience ID" />
+
+Each Mailchimp audience has a unique [Audience ID](https://mailchimp.com/help/find-audience-id/).
+Retrieve the ID for the list you want to add a subscriber to.
+
+<Step number={3} title="Add Environment Variables" />
+
+To securely access the API, we need to include the secret with each request.
+We also _do not_ want to commit secrets to git. Thus, we should use an environment variable.
+
+- **Netlify:** Settings -> Build & deploy -> Environment -> Environment variables.
+- **Vercel:** Settings -> General -> Environment Variables.
+
+Alternatively, you can add the enviornment variable to your `vercel.json` or `netlify.toml` file.

@@ -28,11 +28,11 @@ const ToggleSwitch = ({ children, ...rest }) => {
       defaultValue="vercel"
       mt={8}
       css={{
-        '~ pre': {
-          display: provider === 'netlify' ? 'initial' : 'none'
-        },
-        ' + pre:nth-of-type(1)': {
-          display: provider === 'vercel' ? 'initial' : 'none'
+        ' + pre': {
+          display: provider === 'vercel' ? 'initial' : 'none',
+          ' + pre': {
+            display: provider === 'netlify' ? 'initial' : 'none'
+          }
         }
       }}
       {...rest}

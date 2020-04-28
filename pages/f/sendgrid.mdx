@@ -4,143 +4,77 @@ description: 'Send an email to a user.'
 logo: 'sendgrid.png'
 ---
 
+import Step from '../../components/Step';
 import ToggleSwitch from '../../components/ToggleSwitch';
 
-<ToggleSwitch />;
+<ToggleSwitch />
 
 ```js
-const sendGrid = require('@sendgrid/client');
-const {
-  SENDGRID_API_KEY,
-  SENDGRID_SENDER_EMAIL,
-  SENDGRID_SENDER_NAME
-} = process.env;
+import sendgrid from '@sendgrid/mail';
 
-sendGrid.setApiKey(SENDGRID_API_KEY);
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async (req, res) => {
-  const { email } = req.body;
-
-  let response;
   try {
-    await await sendGrid.request({
-      method: 'POST',
-      url: '/v3/contactdb/recipients',
-      body: [
-        {
-          email: email
-        }
-      ]
-    });
-
-    response = await sendGrid.request({
-      method: 'POST',
-      url: '/v3/mail/send',
-      body: {
-        from: {
-          email: SENDGRID_SENDER_EMAIL,
-          name: SENDGRID_SENDER_NAME
-        },
-        reply_to: {
-          email: SENDGRID_SENDER_EMAIL
-        },
-        personalizations: [
-          {
-            to: [
-              {
-                email: email
-              }
-            ],
-            subject: 'Hello, World!'
-          }
-        ],
-        content: [
-          {
-            type: 'text/plain',
-            value: 'Hello, World!'
-          }
-        ]
-      }
+    await sendgrid.send({
+      to: 'your@email.com',
+      from: 'your@email.com',
+      subject: 'jamstackfns',
+      text: 'Hello, world!'
     });
   } catch (error) {
     return res.status(error.statusCode || 500).json({ error: error.message });
   }
 
-  return res
-    .status(response.statusCode)
-    .json({ message: `${email} sent successfully!` });
+  return res.status(200).json({ error: '' });
 };
 ```
 
 ```js
-const sendGrid = require('@sendgrid/client');
-const {
-  SENDGRID_API_KEY,
-  SENDGRID_SENDER_EMAIL,
-  SENDGRID_SENDER_NAME
-} = process.env;
+import sendgrid from '@sendgrid/mail';
 
-sendGrid.setApiKey(SENDGRID_API_KEY);
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.handler = async (event, context) => {
-  const body = JSON.parse(event.body);
-  const email = body.email;
-
-  let response;
   try {
-    await await sendGrid.request({
-      method: 'POST',
-      url: '/v3/contactdb/recipients',
-      body: [
-        {
-          email: email
-        }
-      ]
-    });
-
-    response = await sendGrid.request({
-      method: 'POST',
-      url: '/v3/mail/send',
-      body: {
-        from: {
-          email: SENDGRID_SENDER_EMAIL,
-          name: SENDGRID_SENDER_NAME
-        },
-        reply_to: {
-          email: SENDGRID_SENDER_EMAIL
-        },
-        personalizations: [
-          {
-            to: [
-              {
-                email: email
-              }
-            ],
-            subject: 'Hello, World!'
-          }
-        ],
-        content: [
-          {
-            type: 'text/plain',
-            value: 'Hello, World!'
-          }
-        ]
-      }
+    await sendgrid.send({
+      to: 'your@email.com',
+      from: 'your@email.com',
+      subject: 'jamstackfns',
+      text: 'Hello, world!'
     });
   } catch (error) {
-    return {
-      statusCode: error.statusCode || 500,
-      body: JSON.stringify({
-        error: error.message
-      })
-    };
+    return res.status(error.statusCode || 500).json({ error: error.message });
   }
 
   return {
-    statusCode: response.statusCode,
-    body: JSON.stringify({
-      message: `${email} sent successfully!`
-    })
+    statusCode: 200,
+    body: JSON.stringify({ error: '' })
   };
 };
 ```
+
+## Usage
+
+<Step number={1} title="Create SendGrid Account" />
+
+First, [create a SendGrid account](https://signup.sendgrid.com/). Then, generate an [API key](https://app.sendgrid.com/guide/integrate/langs/nodejs).
+
+<Step number={2} title="Add Sender Authentication" />
+
+To protect against spam, SendGrid requires customers to verify their [Sender Identities](https://sendgrid.com/docs/for-developers/sending-email/sender-identity/).
+
+1. Navigate to [Sender Authentication](https://app.sendgrid.com/settings/sender_auth).
+2. Click "Create New Sender".
+3. Fill out the form and click "Create".
+4. Verify your email address.
+
+<Step number={3} title="Add Environment Variables" />
+
+To securely access the API, we need to include the secret with each request.
+We also _do not_ want to commit secrets to git. Thus, we should use an environment variable.
+
+- **Netlify:** Settings -> Build & deploy -> Environment -> Environment variables.
+- **Vercel:** Settings -> General -> Environment Variables.
+
+Alternatively, you can add the enviornment variable to your `vercel.json` or `netlify.toml` file.

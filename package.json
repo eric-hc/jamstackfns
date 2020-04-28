@@ -40,6 +40,7 @@
     "@mdx-js/loader": "1.5.8",
     "@mdx-js/react": "1.5.8",
     "@next/mdx": "9.3.4",
+    "@sendgrid/mail": "^7.0.1",
     "babel-plugin-import-glob-array": "0.2.0",
     "comma-number": "2.0.1",
     "cookie-parser": "^1.4.5",
