@@ -75,7 +75,7 @@ const Subscribe = () => {
       >
         New functions in your inbox
       </Heading>
-      <Text fontSize="sm">Get acess to functions when they're added.</Text>
+      <Text fontSize="sm">Get access to functions when they're added.</Text>
       <InputGroup size="md" mt={6}>
         <Input
           aria-label="Email for newsletter"
