@@ -1,0 +1,114 @@
+---
+title: 'Firebase'
+description: 'Read data from Cloud Firestore.'
+logo: 'firebase.png'
+---
+
+import Step from '../../components/Step';
+import ToggleSwitch from '../../components/ToggleSwitch';
+
+<ToggleSwitch />
+
+```js
+import db from '../../lib/db-admin';
+
+export default (req, res) => {
+  if (!req.query.id) {
+    return res.status(400).json({
+      error: 'Missing "id" query parameter'
+    });
+  }
+
+  const ref = db.ref('table').child(req.query.id);
+
+  return ref.once('value', (snapshot) => {
+    res.status(200).json({
+      total: snapshot.val()
+    });
+  });
+};
+```
+
+```js
+import db from '../../lib/db-admin';
+
+exports.handler = async (event, context, callback) => {
+  const { id } = event.queryStringParameters;
+  if (!id) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        error: 'Missing "id" query parameter'
+      })
+    };
+  }
+
+  const ref = db.ref('table').child(id);
+
+  return ref.once('value', (snapshot) => ({
+    statusCode: 200,
+    body: JSON.stringify({
+      total: snapshot.val()
+    })
+  }));
+};
+```
+
+## Library
+
+```js
+const admin = require('firebase-admin');
+
+try {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      client_email: process.env.FIREBASE_CLIENT_EMAIL,
+      private_key: process.env.FIREBASE_PRIVATE_KEY,
+      project_id: 'your-project-id'
+    }),
+    databaseURL: 'https://your-project-id.firebaseio.com'
+  });
+} catch (error) {
+  /*
+   * We skip the "already exists" message which is
+   * not an actual error when we're hot-reloading.
+   */
+  if (!/already exists/u.test(error.message)) {
+    console.error('Firebase admin initialization error', error.stack);
+  }
+}
+
+module.exports = admin.database();
+```
+
+## Usage
+
+<Step number={1} title="Create Firebase Account" />
+
+First, [create a Firebase account](https://firebase.com).
+
+<Step number={2} title="Retrieve Service Account" />
+
+1. Create a new project.
+1. Navigate to "Database" and click "Create Database".
+   ![Create Firebase Database](https://leerob.io/static/images/real-time-post-views/firebase/step1.png)
+1. Start in test mode and click next.
+   ![Create Firebase Database](https://leerob.io/static/images/real-time-post-views/firebase/step2.png)
+1. Choose your database location and click done.
+   ![Create Firebase Database](https://leerob.io/static/images/real-time-post-views/firebase/step3.png)
+1. In the top left, click on "Project Settings".
+   ![Create Firebase Database](https://leerob.io/static/images/real-time-post-views/firebase/step4.png)
+1. Navigate to "Service Accounts" tab and click "Generate new private key". Save the `.json` file. You will need the `client_email` and `private_key` from the file.
+   ![Create Firebase Database](https://leerob.io/static/images/real-time-post-views/firebase/step5.png)
+
+You have successfully set up a real-time database, as well as generated credentials for your serverless function to connect to Firebase.
+
+<Step number={3} title="Add Environment Variables" />
+
+To securely access the API, we need to include the secrets with each request.
+We also _do not_ want to commit secrets to git. Thus, we should use environment variables.
+
+- **Netlify:** Settings -> Build & deploy -> Environment -> Environment variables.
+- **Vercel:** Settings -> General -> Environment Variables.
+
+Alternatively, you can add the enviornment variables to your `vercel.json` or `netlify.toml` file.

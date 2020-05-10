@@ -126,6 +126,29 @@ const Index = () => (
           description="Create an entry in a sheet."
         />
       </SimpleGrid>
+      <Heading as="h2" size="md" fontWeight="bold" letterSpacing="tight" mb={4}>
+        More
+      </Heading>
+      <SimpleGrid columns={[1, 2, 3]} spacing={8} mb={16}>
+        <FunctionCard
+          title="Firebase"
+          slug="firebase"
+          logo="firebase.png"
+          description="Read data from Cloud Firestore."
+        />
+        <FunctionCard
+          title="Buttondown"
+          slug="buttondown"
+          logo="buttondown.png"
+          description="Subscribe to a newsletter."
+        />
+        <FunctionCard
+          title="Slack"
+          slug="slack"
+          logo="slack.png"
+          description="Create a slash command."
+        />
+      </SimpleGrid>
       <Subscribe />
     </Box>
   </Container>

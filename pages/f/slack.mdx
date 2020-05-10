@@ -1,0 +1,85 @@
+---
+title: 'Slack'
+description: 'Create a slash command.'
+logo: 'slack.png'
+---
+
+import Step from '../../components/Step';
+import ToggleSwitch from '../../components/ToggleSwitch';
+
+<ToggleSwitch />
+
+```js
+export default (req, res) => {
+  const { token, text } = req.body;
+
+  if (token !== process.env.SLACK_TOKEN) {
+    return res.status(400);
+  }
+
+  const textUrl = text && `/says/${text}`;
+
+  return res.status(200).json({
+    response_type: 'in_channel',
+    text: `https://cataas.com/cat${textUrl}`
+  });
+};
+```
+
+```js
+exports.handler = async (event, context, callback) => {
+  const { token, text } = JSON.parse(event.body);
+
+  if (token !== process.env.SLACK_TOKEN) {
+    return {
+      statusCode: 400
+    };
+  }
+
+  const textUrl = text && `/says/${text}`;
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      response_type: 'in_channel',
+      text: `https://cataas.com/cat${textUrl}`
+    })
+  };
+};
+```
+
+## Usage
+
+<Step number={1} title="Create a Slack App" />
+
+First, [create a Slack app](https://api.slack.com/apps?new_app=1).
+If you don't have an organization yet, you'll also need to [create one](https://slack.com/create).
+
+<Step number={2} title="Add Slash Command" />
+
+With your app created, you can define a slash command.
+
+1. Navigate to "Slash Commands" and click "Create New Command".
+2. Fill out the form using the deployed URL for your function.
+3. Hit "Save".
+
+![Slash Command](/docs/slash-command.png)
+
+<Step number={3} title="Add To Workspace" />
+
+Navigate back to "Basic Information" click "Install App to Workspace".
+Make note of the Verification Token. We need to add this as an environment variable.
+
+<Step number={4} title="Add Environment Variable" />
+
+We need to ensure the verifcation token matches the request.
+We also _do not_ want to commit secrets to git. Thus, we should use an environment variable.
+
+- **Netlify:** Settings -> Build & deploy -> Environment -> Environment variables.
+- **Vercel:** Settings -> General -> Environment Variables.
+
+Alternatively, you can add the enviornment variable to your `vercel.json` or `netlify.toml` file.
+
+<Step number={5} title="Use Your Command" />
+
+![Custom Slack Slash Command](/docs/slack-example.png)
