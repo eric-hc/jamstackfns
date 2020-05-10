@@ -134,7 +134,7 @@ const Index = () => (
           title="Firebase"
           slug="firebase"
           logo="firebase.png"
-          description="Read data from Cloud Firestore."
+          description="Read data from Realtime Database."
         />
         <FunctionCard
           title="Buttondown"
