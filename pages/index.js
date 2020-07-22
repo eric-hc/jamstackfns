@@ -143,10 +143,28 @@ const Index = () => (
           description="Subscribe to a newsletter."
         />
         <FunctionCard
+          title="Buttondown"
+          slug="buttondown-subscribers"
+          logo="buttondown.png"
+          description="Get all subscribers."
+        />
+        <FunctionCard
           title="Slack"
           slug="slack"
           logo="slack.png"
           description="Create a slash command."
+        />
+        <FunctionCard
+          title="Spotify"
+          slug="spotify"
+          logo="spotify.png"
+          description="Show what you're listening to."
+        />
+        <FunctionCard
+          title="Spotify"
+          slug="spotify-top-tracks"
+          logo="spotify.png"
+          description="List your top tracks."
         />
       </SimpleGrid>
       <Subscribe />
