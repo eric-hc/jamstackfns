@@ -38,31 +38,31 @@ const About = () => (
           <Text color="gray.700" mb={4}>
             <Link
               href="https://jamstack.org/"
-              title="JAMstack"
+              title="Jamstack"
               isExternal
               color="hsl(208, 99%, 44%)"
             >
-              {'JAMstack'}
+              {'Jamstack'}
             </Link>
             &nbsp;(JavaScript, APIs, and Markup) is fundamentally reshaping the
             web. Coined by&nbsp;
             <Link
               href="https://en.wikipedia.org/wiki/Netlify#JAMstack"
-              title="JAMstack"
+              title="Jamstack"
               isExternal
               color="hsl(208, 99%, 44%)"
             >
               {`Netlify's co-founder`}
             </Link>
-            , JAMstack bridges the gap between static and dynamic websites.
+            , Jamstack bridges the gap between static and dynamic websites.
             Capitalize on static site performance, security, and scalability
             while still having dynamic data.
           </Text>
           <Text color="gray.700" mb={4}>
             <Link href="/" title="jamstackfns" color="hsl(208, 99%, 44%)">
-              {'JAMstack Functions'}
+              {'Jamstack Functions'}
             </Link>
-            &nbsp;is a directory of the best serverless functions for JAMstack
+            &nbsp;is a directory of the best serverless functions for Jamstack
             applications. Quickly deploy serverless functions to Vercel or
             Netlify for your static site and start building.
           </Text>
